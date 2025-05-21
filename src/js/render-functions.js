@@ -3,7 +3,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const galleryContainer = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
-const loaderMessage = document.querySelector('.loader-message');
+const loaderMessage = document.querySelector('.loader');
 
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
@@ -12,9 +12,9 @@ const lightbox = new SimpleLightbox('.gallery a', {
 
 export function createGallery(images) {
   const markup = images
-    .map(
-      img => `
-      <div class="photo-card">
+  .map(
+    img => `
+      <li class="photo-card">
         <a href="${img.largeImageURL}" class="gallery-item">
           <img src="${img.webformatURL}" alt="${img.tags}" loading="lazy" />
         </a>
@@ -36,10 +36,10 @@ export function createGallery(images) {
             <span>${img.downloads}</span>
           </div>
         </div>
-      </div>
+      </li>
     `
-    )
-    .join('');
+  )
+  .join('');
 
   galleryContainer.insertAdjacentHTML('beforeend', markup);
   lightbox.refresh();
